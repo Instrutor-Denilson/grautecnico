@@ -1,0 +1,474 @@
+/**********************************
+
+	Atividades de Fixação - Parte 04
+	
+		Converta os algoritmos 4.1, 4.2 e 4.3 para o linguagem usada no VisualG.
+		O desafio é opcional.
+		
+		Última data para entrega: 15/09/2026 (impreterívelmente)
+		
+***********************************/
+
+
+
+Algoritmo { 4.1 }
+		
+	real NOTA1, NOTA2, NOTA3, NOTA4
+	real MEDIA, MAIOR, MENOR, SOMA, AUX
+	real BIM_1_2, BIM_3_4
+	literal FRASE
+	
+	BIM_1_2 <- 20
+	BIM_3_4 <- 30
+	
+	leia NOTA1, NOTA2, NOTA3, NOTA4
+	
+	SOMA <- NOTA1 + NOTA2 + NOTA3 + NOTA4
+	
+	se ( SOMA < 40 )
+		então FRASE <- "O aluno foi reprovado!"
+		senão 	se ( SOMA >= 60 )
+					então FRASE <- "O aluno está aprovado!"
+					senao FRASE <- "O aluno está de recuperação!"
+				fim se
+	fim se
+	
+	MEDIA <- SOMA / 4
+	
+
+
+	{ ATENÇÃO: em algoritmo, o símbolo de pipe (|) significa concatenação de literais }
+	FRASE <- FRASE | "A media das notas é: " | MEDIA
+	
+	MAIOR <- NOTA1
+	MENOR <- NOTA1
+	
+	se (NOTA2 < MENOR)
+		então MENOR <- NOTA2
+		senão 	se (NOTA3 < MENOR)
+					então MENOR <- NOTA3
+					senão 	se (NOTA4 < MENOR)
+								então MENOR <- NOTA4
+							fim se
+				fim se
+	fim se
+	
+	FRASE <- FRASE | "A menor nota digitada é: " | MENOR
+	
+	se (NOTA2 > MAIOR)
+		então MAIOR <- NOTA2
+		senão 	se (NOTA3 > MAIOR)
+					então MAIOR <- NOTA3
+					senão 	se (NOTA4 > MAIOR)
+								então MAIOR <- NOTA4
+							fim se
+				fim se
+	fim se
+	
+	FRASE <- FRASE | "A maior nota digitada é: " | MAIOR
+		
+	AUX <- (BIM_1_2 * 60) / 100
+	se ( NOTA1 < AUX)
+		então FRASE <- FRASE | "A primeira nota: " | NOTA1 | " esta abaixo da média!"
+	fim se
+	
+	se ( NOTA2 < AUX)
+		então FRASE <- FRASE | "A segunda nota: " | NOTA2 | " esta abaixo da média!"
+	fim se
+	
+	AUX <- BIM_3_4 * 0,60
+	se ( NOTA3 < AUX)
+		então FRASE <- FRASE | "A terceira nota: " | NOTA3 | " esta abaixo da média!"
+	fim se
+	
+
+	se ( NOTA4 < AUX)
+		então FRASE <- FRASE | "A quarta nota: " | NOTA4 | " esta abaixo da média!"
+	fim se
+	
+	escreva FRASE
+	
+fim algoritmo
+
+
+
+algoritmo { 4.2 }
+	declare nota1, nota2, nota3, notafinal, menornota, maiornota, media, somanota real
+	
+	declare alunos, matricula, frequencia, reprovados, infrequente, porcentagem_infreq inteiro
+	
+	declare situacao literal
+	
+	menornota <- 200
+	maiornota <- -1
+	alunos <- 1
+	somanota <- 0
+	reprovados <- 0
+	situacao <- ""
+	infrequente <- 0
+	enquanto (alunos < 101) faça
+		leia matricula, nota1, nota2, nota3, frequencia
+		
+		notafinal <- (nota1 + nota2 + nota3)/3
+		
+		se ( (nota1 < menornota) e (nota1 < nota2) e (nota1 < nota3) )
+			então menornota <- nota1
+			senão se ( (nota2 < menornota) e (nota2 < nota3) )
+					então menornota <- nota2
+					senão se (nota3 < menornota)
+							então menornota <- nota3
+						  fim se
+				  fim se
+		fim se
+		
+		se ( (nota1 > maiornota) e (nota1 > nota2) e (nota1 > nota3) )
+			então maiornota <- nota1
+			senão se ( (nota2 > maiornota) e (nota2 > nota3) )
+					então maiornota <- nota2
+					senão se (nota3 > maiornota)
+							então maiornota <- nota3
+						  fim se
+				  fim se
+		fim se
+		
+		somanota <- somanota + (nota1 + nota2 + nota3)
+		
+		se (notafinal >= 60 e frequencia >= 40)
+			então situacao <- "Aprovado"
+			senão reprovados <- reprovados + 1
+			      se (frequencia < 40)
+					então infrequente <- infrequente+ 1
+				  fim se
+				  situacao <- "Reprovado"
+		fim se
+		
+
+		escreva matricula, frequencia, notafinal, situacao
+		
+		alunos <- alunos + 1
+		
+	fim enquanto
+	
+	media <- somanota / 300
+	porcentagem_infreq <- ( infrequentes * 100 ) / reprovados
+	
+	escreva media, menornota, maiornota, reprovados, porcentagem_infreq
+	
+fim algoritmo
+
+
+
+
+Algoritmo { 4.3 }
+	declare BOIS, GORDO, MAGRO, HOLANDESA,
+			NELORE, ZEBU, GORDO_HOLANDESA, GORDO_ZEBU, 
+			GORDO_NELORE, PESO, CODIGO, IDADE inteiro
+	
+	declare MEDIA_PESO, SOMA_PESO real
+	
+	declare RACA literal
+	
+	BOIS <- 0
+	MAGRO <- 100000
+	GORDO <- 0
+	NELORE <- 0
+	ZEBU <- 0
+	HOLANDESA <- 0
+	GORDO_NELORE <- 0	
+	GORDO_ZEBU <- 0
+	GORDO_HOLANDESA <- 0
+	SOMA_PESO <- 0
+	MEDIA_PESO <- 0
+	
+	enquanto ( BOIS < 1500 ) faça
+		leia (PESO, RACA, CODIGO, IDADE)
+	
+		BOIS <- BOIS + 1
+		
+		SOMA_PESO <- SOMA_PESO + PESO
+		
+		Se (PESO < MAGRO)
+			Então MAGRO <- PESO
+		Fim se
+		
+		Se (PESO > GORDO)
+			Então GORDO <- PESO
+		Fim se
+		
+		Se (RACA = "nelore")
+			Então 	NELORE <- NELORE + 1
+					Se (PESO > GORDO_NELORE)
+						Então GORDO_NELORE <- PESO
+					Fim se
+			Senão 	Se (RACA = "zebu")
+						Então 	ZEBU <- ZEBU + 1
+								Se (PESO > GORDO_ZEBU)
+									Então GORDO_ZEBU <- PESO
+								Fim se
+						Senão 	HOLANDESA <- HOLANDESA + 1
+								Se (PESO > GORDO_HOLANDESA)
+								Então GORDO_HOLANDESA <- PESO
+								Fim se
+					Fim se
+		Fim se
+		
+	Fim enquanto
+	MEDIA_PESO <- SOMA_PESO / 1500
+	
+	Escreva 	( 	GORDO, MAGRO, NELORE, ZEBU, HOLANDESA,
+				GORDO_HOLANDESA, GORDO_ZEBU,
+				GORDO_NELORE, MEDIA_PESO )
+Fim algoritmo
+
+
+
+			DESAFIO
+
+/****************************************************
+**
+**		Project: Folha de Pagamento.
+** 		File(s): DESAFIO_PRATICO
+**		Author(es): Jupira, Asdrubal e Astrogildo.
+**		Creation Date: 03/08/2011
+**		Objective: 
+**		# Algoritmo com o cálculo simples de uma folha de pagamento, para a atividade de fixação e avaliativa,
+**		  da aula de Lógica de Programação da escola GRAU Técnico -Santa Luzia.
+**			OBSERVAÇÃO: este algoritmo baseia-se em informações colhidas através de pesquisas
+**						na internet! Serve apenas para trazer informações mais consistentes
+**						sobre o tema, sendo o seu emprego apenas didático.
+**						Para fins profissionais, deve-se buscar informações mais completas
+**						com um profissional da área ou literaturas especializadas.
+**
+**		Last modification:
+**		26/04/11 - inclusão de comentários.
+**		27/04/11 - melhorias no cálculo do salário família.
+**		23/08/26 - adaptação para as regras de 2026.
+**		04/09/26 - atualização dos valores cobrados do empregado.
+**		06/09/26 - atualização geral dos valores e referências legais para o exercício
+**				   escolar, com base nos parâmetros vigentes a partir de janeiro/2026
+**				   (Portaria Interministerial MPS/MF nº 13, de 09/01/2026). Correção de
+**				   caracteres e revisão das fontes de referência.
+**		10/09/26 - ????
+**		
+*****************************************************/
+
+/* ==================================== COMENTÁRIOS GERAIS =====================================*/
+
+O Vale-Transporte deve ser concedido de forma antecipada na quantidade necessária para o deslocamento(1) residência-trabalho e vice-versa. Sendo assim o empregador deve se dirigir à empresa que opera o transporte coletivo para adquirir os bilhetes de passagem e posteriormente entregar ao empregado.
+*Parágrafo único do Art. 2º do Decreto 95.247/87.
+
+(1) Entende-se como deslocamento a soma dos segmentos componentes da viagem do beneficiário por um ou mais meios de transporte, entre sua residência e o local de trabalho.
+
+==> Custeio do Vale-Transporte
+
+O vale-transporte será custeado:
+
+I - pelo beneficiário, na parcela equivalente a 6% (seis por cento) de seu salário básico ou vencimento, excluídos quaisquer adicionais ou vantagens; e
+
+II - pelo empregador, no que exceder à parcela referida no item anterior.
+
+A concessão do vale-transporte autorizará o empregador a descontar mensalmente, do beneficiário que exercer o respectivo direito, o valor da parcela de até 6% de seu salário, cujo desconto será proporcional à quantidade de vale-transporte concedida para o período a que se refere o salário ou vencimento e por ocasião de seu pagamento, salvo estipulação em contrário, em convenção ou acordo coletivo de trabalho que favoreça o beneficiário.
+
+Observação (2026): a regra do percentual de 6% permanece inalterada desde a Lei nº 7.418/1985 e o Decreto nº 95.247/1987; não sofreu reajuste monetário, pois é definida como percentual do salário-base do próprio empregado, e não como valor fixo.
+
+6.1 Despesa Inferior a 6% do Salário Básico
+
+Caso a despesa com o deslocamento do beneficiário seja inferior a 6% (seis por cento) do salário básico ou vencimento, o empregado poderá optar pelo recebimento antecipado do vale-transporte, cujo valor será integralmente descontado por ocasião do pagamento do respectivo salário ou vencimento. 
+
+FONTES DE REFERÊNCIA:
+Lei nº 7.418, de 16 de dezembro de 1985.
+Decreto nº 95.247, de 17 de novembro de 1987.
+https://www.gov.br/trabalho-e-emprego/pt-br
+
+				=======================================
+
+TABELA VIGENTE - Desconto do INSS (a partir de Janeiro/2026)
+
+	Tabela de contribuição dos segurados empregado, empregado doméstico e trabalhador avulso,
+	para pagamento de remuneração a partir de 1º de Janeiro de 2026, conforme a
+	Portaria Interministerial MPS/MF nº 13, de 09/01/2026.
+
+	Salário-mínimo nacional (2026): R$ 1.621,00
+	
+	Salário-de-contribuição (R$) 			Alíquota para fins de recolhimento ao INSS (%)
+	até R$ 1.621,00 				7,50
+	de R$ 1.621,01 até R$ 2.902,84 			9,00
+	de R$ 2.902,85 até R$ 4.354,27 			12,00
+	de R$ 4.354,28 até R$ 8.475,55 			14,00
+
+	==> O teto do salário-de-contribuição do INSS em 2026 é R$ 8.475,55
+
+		OBSERVAÇÃO: o cálculo é progressivo por faixas (igual ao cálculo do IRRF): cada
+					alíquota incide apenas sobre a parcela do salário compreendida na
+					respectiva faixa, e não sobre o valor total do salário.
+					O desconto máximo (teto) em 2026 é de R$ 988,07, aplicado a quem
+					ganha R$ 8.475,55 ou mais.
+					Exemplo: Asdrubal ganha R$ 100.000,00 por mês. Seu desconto não é
+					14% disso; é limitado ao teto de R$ 988,07.
+
+FONTES DE REFERÊNCIA: 
+Portaria Interministerial MPS/MF nº 13, de 09 de janeiro de 2026.
+https://www.gov.br/inss/pt-br
+https://www.in.gov.br/ (Diário Oficial da União)
+	
+				=======================================
+				
+Salário Família (a partir de Janeiro/2026)
+
+    * O que é
+
+Benefício pago aos segurados empregados, exceto os domésticos (no caso do empregado doméstico há regra equivalente via eSocial), e aos trabalhadores avulsos com remuneração mensal dentro do limite legal, para auxiliar no sustento dos filhos de até 14 anos de idade ou inválidos de qualquer idade. (Observação: são equiparados aos filhos os enteados e os tutelados, estes desde que não possuam bens suficientes para o próprio sustento, devendo a dependência econômica de ambos ser comprovada).
+
+Para a concessão do salário-família, a Previdência Social não exige tempo mínimo de contribuição.
+
+    * Valor do benefício
+
+De acordo com a Portaria Interministerial MPS/MF nº 13, de 09 de janeiro de 2026, desde a unificação da faixa de renda (Lei nº 14.663/2023), não há mais duas faixas de valor: em 2026 o salário-família corresponde a uma cota única de R$ 67,54 por filho de até 14 anos incompletos ou inválido de qualquer idade, devida a quem recebe remuneração mensal de até R$ 1.980,38.
+
+    * Quem tem direito ao benefício
+          # o empregado e o trabalhador avulso que estejam em atividade;
+          # o empregado e o trabalhador avulso aposentados por incapacidade permanente, por idade ou em gozo de auxílio por incapacidade temporária;
+          # o trabalhador rural (empregado rural ou trabalhador avulso) que tenha se aposentado por idade aos 60 anos, se homem, ou 55 anos, se mulher;
+          # os demais aposentados, desde que empregados ou trabalhadores avulsos, quando completarem 65 anos (homem) ou 60 anos (mulher).
+
+Os desempregados não têm direito ao benefício.
+
+Quando o pai e a mãe são segurados empregados ou trabalhadores avulsos, ambos têm direito ao salário-família, desde que ambos estejam dentro do limite de renda.
+
+Atenção:
+
+O benefício será encerrado quando o(a) filho(a) completar 14 anos, em caso de falecimento do filho, por ocasião de desemprego do segurado e, no caso do filho inválido, quando da cessação da incapacidade.
+
+FONTE DE REFERÊNCIA: 
+Portaria Interministerial MPS/MF nº 13, de 09 de janeiro de 2026.
+Lei nº 8.213, de 24 de julho de 1991 (artigos 65 a 70).
+https://www.gov.br/inss/pt-br/direitos-e-deveres/salario-familia
+
+================================================================================================ */
+
+
+ALGORITMO
+	REAL salariobruto, valetransporte, salarioliquido, salariohora, valorvale,
+				desconto, beneficio, inss, salariofamilia
+	
+	LITERAL nomefuncionario
+	
+	INTEIRO codigocargo, codigofuncionario, horastrabalhadas, quantidadevale,
+				filho, resposta
+	
+	
+	LEIA codigofuncionario
+	
+	ENQUANTO (codigofuncionario > 0) FAÇA
+		
+		valetransporte <- 0
+		desconto <- 0
+		beneficio <- 0
+		filho <- 0
+		salariofamilia <- 0
+	
+		LEIA nomefuncionario, horastrabalhadas
+		
+		ESCREVA "Informe o cargo do funcionário:"
+		ESCREVA "1 - Gerente"
+		ESCREVA "2 - Supervisor"
+		ESCREVA "3 - Técnico de Suporte"
+		ESCREVA "4 - Assistente Administrativo"
+		ESCREVA "5 - Vendedor"
+		ESCREVA "6 - Analista de Sistemas"
+		ESCREVA "7 - Serviços Gerais"
+		LEIA codigocargo
+		
+		SE (codigocargo = 1)
+			ENTÃO salariohora <- 43,50
+			SENÃO SE (codigocargo = 2)
+					ENTÃO salariohora <- 30,50
+					SENÃO SE (codigocargo = 3)
+							ENTÃO salariohora <- 06,40
+							SENÃO SE (codigocargo = 4)
+									ENTÃO salariohora <- 04,25
+									SENÃO SE (codigocargo = 5)
+											ENTÃO salariohora <- 08,35
+											SENÃO SE (codigocargo = 6)
+													ENTÃO salariohora <- 12,65
+													SENÃO salariohora <- 02,95
+												  FIM SE
+										  FIM SE
+								   FIM SE
+						   FIM SE
+				   FIM SE
+		FIM SE
+		
+		salariobruto <- salariohora * horastrabalhadas
+		
+		ESCREVA "O funcionario possui algum filho(a) menor de 14 anos ou inválido?"
+		ESCREVA "Digite a quantidade ou 0 (zero), caso não tenha!"
+		LEIA filho
+		
+		ESCREVA "O funcionário possui algum desconto em folha (vale farmácia, empréstimos, etc)?"
+		ESCREVA "Digite 0 (zero) caso não tenha!"
+		LEIA desconto
+		
+		ESCREVA "O funcionário possui algum benefício (comissão, abono, etc)?"
+		ESCREVA "Digite 0 (zero) caso não tenha!"
+		LEIA beneficio
+		
+		ESCREVA "O funcionário utiliza vale transporte (1 - SIM/2 - NÃO)?"
+		LEIA resposta
+		
+		SE (resposta = 1)
+			ENTÃO 	ESCREVA "Qual o valor do vale (R$)?"
+					LEIA valorvale
+					
+					ESCREVA "Qual a quantidade?"
+					LEIA quantidadevale
+					
+					valetransporte <- valorvale * quantidadevale
+					
+					SE (valetransporte > (salariobruto * 0,06) )
+						ENTÃO valetransporte <- (salariobruto * 0,06)
+					FIM SE
+		FIM SE
+		
+		{ Salário-família 2026: cota única de R$ 67,54 por filho, para quem recebe até R$ 1.980,38 }
+		SE ( filho > 0)
+			ENTÃO 	SE ( salariobruto <= 1980,38)
+						ENTÃO salariofamilia <- filho * 67,54
+					FIM SE
+		FIM SE
+		
+		salariobruto <- salariobruto + salariofamilia + beneficio
+		
+		{ Tabela do INSS vigente a partir de Janeiro/2026 (Portaria Interministerial MPS/MF nº 13/2026) }
+		SE (salariobruto <= 1621,00)
+			ENTÃO inss <- salariobruto * 0,075 { desconto de 7,5% }
+			SENÃO 	SE (salariobruto <= 2902,84)
+						ENTÃO inss <- salariobruto * 0,09 { desconto de 9% }
+						SENÃO 	SE (salariobruto <= 4354,27)
+									ENTÃO inss <- salariobruto * 0,12 { desconto de 12% }
+									SENÃO 	SE (salariobruto <= 8475,55)
+												ENTÃO inss <- salariobruto * 0,14 { desconto de 14% }
+												SENÃO inss <- 988,07  { desconto máximo, teto do INSS }
+											FIM SE
+								FIM SE
+					FIM SE
+		FIM SE
+		
+		{ OBSERVAÇÃO DIDÁTICA: o cálculo acima é simplificado (alíquota única sobre o total).
+		  O cálculo oficial de 2026 é PROGRESSIVO por faixas (como o IRRF), aplicando cada
+		  alíquota apenas sobre a parcela do salário dentro da respectiva faixa.
+		  Fica como desafio extra para o aluno reimplementar o cálculo progressivo
+		  e comparar os dois resultados. }
+		
+		salarioliquido <- salariobruto - (inss + desconto + valetransporte)
+		
+		ESCREVA codigofuncionario, nomefuncionario, salariobruto, salarioliquido
+		
+		LEIA codigofuncionario
+		
+	FIM ENQUANTO
+FIM ALGORITMO
+
+
+
+
